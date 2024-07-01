@@ -38,7 +38,7 @@ pip install -e .
 Coming soon
 
 # Training
-
+We used DeepSpeed Zero3 to train our models.
 ## Student Model
 
 ```bash
@@ -48,8 +48,8 @@ deepspeed --master_port 60000 llava/train/train_mem.py \
     --deepspeed ./scripts/zero3.json \
     --model_name_or_path  Lin-Chen/open-llava-next-llama3-8b \
     --version llama_v3_student \
-    --data_path data/FeedbackReflection/json/train/fire_student_train_feedback_sim_351k.json \
-    --image_folder ./data/FeedbackReflection/image \
+    --data_path data/path/to/FIRE-Dataset-Student \
+    --image_folder data/path/to/images \
     --vision_tower openai/clip-vit-large-patch14-336 \
     --mm_projector_type mlp2x_gelu \
     --mm_vision_select_layer -2 \
@@ -89,9 +89,8 @@ deepspeed --master_port 60001 llava/train/train_mem.py \
     --deepspeed ./scripts/zero3.json \
     --model_name_or_path  Lin-Chen/open-llava-next-llama3-8b \
     --version llama_v3_teacher \
-    --data_path data/FeedbackReflection/json/train/fire_teacher_train_feedback.json \
-    --data_path_test data/FeedbackReflection/json/test/merge_processed_teacher_test.json \
-    --image_folder ./data/FeedbackReflection/image \
+    --data_path data/path/to/FIRE-Dataset-Teacher \
+    --image_folder data/path/to/images \
     --vision_tower openai/clip-vit-large-patch14-336 \
     --mm_projector_type mlp2x_gelu \
     --mm_vision_select_layer -2 \
