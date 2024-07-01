@@ -35,7 +35,8 @@ pip install -e .
 # pip install flash-attn --no-build-isolation --no-cache-dir
 ```
 # Dataset
-Coming soon
+
+The FIRE-100K, FIRE-1M, and FIRE-Bench datasets can be accessed at the following [Dataset](https://huggingface.co/datasets/PengxiangLi/FIRE/) page.
 
 # Training
 We used DeepSpeed Zero3 to train our models.
