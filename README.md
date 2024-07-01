@@ -124,6 +124,13 @@ deepspeed --master_port 60001 llava/train/train_mem.py \
 ```
 Training for student and teacher models takes 16 hours on 8xA-100-80GB for every 1 million data points.
 
+# Evaluation
+## Instruction Following
+We follow the exactly same evaluation script LLaVA repo provided. Please refer to this [Evaluation.md](https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md).
+## Fixed Dialogue
+Coming soon
+## Free Dialogue
+Coming soon
 # Acknowledgement
 Thanks for their brilliant contributions to the community! Here are the codebases we built upon.
 * [LLaVA](https://github.com/lm-sys/FastChat)
