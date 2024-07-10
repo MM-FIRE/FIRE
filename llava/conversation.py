@@ -517,7 +517,7 @@ conv_llava_llama_3_original = Conversation(
     offset=0,
     sep_style=SeparatorStyle.LLAMA_3,
     tokenizer_id="meta-llama/Meta-Llama-3-8B-Instruct",
-    tokenizer=AutoTokenizer.from_pretrained("/scratch/TecManDep/llm_weights/llama-3/Meta-Llama-3-8B"),
+    tokenizer=None
     stop_token_ids=[128009],
 )
 
