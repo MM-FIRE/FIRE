@@ -55,7 +55,8 @@ deepspeed --master_port 60000 llava/train/train_mem.py \
     --mm_vision_select_layer -2 \
     --mm_use_im_start_end False \
     --mm_use_im_patch_token False \
-    --image_aspect_ratio pad \
+    --image_aspect_ratio anyres \
+    --mm_patch_merge_type spatial_unpad \
     --group_by_modality_length True \
     --bf16 True \
     --output_dir ./checkpoints/llava-next-llama-3-8b-student-lora-merged \
@@ -73,7 +74,7 @@ deepspeed --master_port 60000 llava/train/train_mem.py \
     --lr_scheduler_type "cosine" \
     --logging_steps 1 \
     --tf32 True \
-    --model_max_length 2048 \
+    --model_max_length 3072 \
     --gradient_checkpointing True \
     --dataloader_num_workers 4 \
     --lazy_preprocess True \
@@ -96,7 +97,8 @@ deepspeed --master_port 60001 llava/train/train_mem.py \
     --mm_vision_select_layer -2 \
     --mm_use_im_start_end False \
     --mm_use_im_patch_token False \
-    --image_aspect_ratio pad \
+    --image_aspect_ratio anyres \
+    --mm_patch_merge_type spatial_unpad \
     --group_by_modality_length True \
     --bf16 True \
     --output_dir ./checkpoints/llava-next-llama-3-8b-teacher-lora-merged \
@@ -114,7 +116,7 @@ deepspeed --master_port 60001 llava/train/train_mem.py \
     --lr_scheduler_type "cosine" \
     --logging_steps 1 \
     --tf32 True \
-    --model_max_length 2048 \
+    --model_max_length 3072 \
     --gradient_checkpointing True \
     --dataloader_num_workers 4 \
     --lazy_preprocess True \

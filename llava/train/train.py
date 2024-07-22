@@ -34,6 +34,7 @@ from llava.train.llava_trainer import LLaVATrainer
 from llava import conversation as conversation_lib
 from llava.model import *
 from llava.mm_utils import tokenizer_image_token
+from llava.mm_utils import process_anyres_image, tokenizer_image_token
 
 from PIL import Image
 
@@ -1088,6 +1089,10 @@ class LazySupervisedDataset(Dataset):
                         return result
                 image = expand2square(image, tuple(int(x*255) for x in processor.image_mean))
                 image = processor.preprocess(image, return_tensors='pt')['pixel_values'][0]
+            elif self.data_args.image_aspect_ratio == "anyres":
+                image_size = image.size
+                image = process_anyres_image(       # torch.Size([5, 3, 336, 336])
+                    image, processor, self.data_args.image_grid_pinpoints)
             else:
                 image = processor.preprocess(image, return_tensors='pt')['pixel_values'][0]
             sources = preprocess_multimodal(
@@ -1332,6 +1337,11 @@ def train(attn_implementation=None):
         data_args.is_multimodal = True
 
         model.config.image_aspect_ratio = data_args.image_aspect_ratio
+        if data_args.image_aspect_ratio == 'anyres':
+            base_size = vision_tower.config.image_size
+            grids = [[1, 2], [2, 1], [2, 2], [3, 1], [1, 3]]
+            model.config.image_grid_pinpoints = data_args.image_grid_pinpoints = [
+                [g[0]*base_size, g[1]*base_size] for g in grids]
         model.config.tokenizer_padding_side = tokenizer.padding_side
         model.config.tokenizer_model_max_length = tokenizer.model_max_length
 
