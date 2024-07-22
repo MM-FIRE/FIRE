@@ -203,7 +203,10 @@ class Conversation:
         for i, (role, msg) in enumerate(self.messages[self.offset:]):
             if i % 2 == 0:
                 if type(msg) is tuple:
-                    msg, image, image_process_mode = msg
+                    if len(msg) == 3:
+                        msg, image, image_process_mode = msg
+                    else:
+                        msg, image = msg
                     img_b64_str = self.process_image(
                         image, "Default", return_pil=False,
                         image_format='JPEG')
@@ -517,7 +520,7 @@ conv_llava_llama_3_original = Conversation(
     offset=0,
     sep_style=SeparatorStyle.LLAMA_3,
     tokenizer_id="meta-llama/Meta-Llama-3-8B-Instruct",
-    tokenizer=AutoTokenizer.from_pretrained("/scratch/TecManDep/llm_weights/llama-3/Meta-Llama-3-8B"),
+    tokenizer=None,
     stop_token_ids=[128009],
 )
 
