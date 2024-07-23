@@ -113,11 +113,11 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
     ) -> Union[GenerateOutput, torch.LongTensor]:
         position_ids = kwargs.pop("position_ids", None)
         attention_mask = kwargs.pop("attention_mask", None)
+        defined_mask_len = kwargs.pop("defined_mask_len", None)
         if "inputs_embeds" in kwargs:
             raise NotImplementedError("`inputs_embeds` is not supported")
 
         if images is not None:
-            current = time.time()
             (
                 inputs,
                 position_ids,
@@ -132,11 +132,13 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                 None,
                 None,
                 images,
-                image_sizes=image_sizes
+                image_sizes=image_sizes,
+                defined_mask_len=defined_mask_len
             )
         else:
             inputs_embeds = self.get_model().embed_tokens(inputs)
-
+        if defined_mask_len is not None:
+            print("LLava Generation!", inputs_embeds.shape, defined_mask_len)
         return super().generate(
             position_ids=position_ids,
             attention_mask=attention_mask,
