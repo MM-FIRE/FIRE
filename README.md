@@ -38,6 +38,9 @@ pip install -e .
 
 The FIRE-100K, FIRE-1M, and FIRE-Bench datasets can be accessed at the following [Dataset](https://huggingface.co/datasets/PengxiangLi/FIRE/) page.
 
+# Checkpoints
+
+The checkpoints of FIRE-LLaVA can be accessed at [Model](https://huggingface.co/li-qing/llava-next-llama3-8b-student-fire) .
 # Training
 We used DeepSpeed Zero3 to train our models.
 ## Student Model
